@@ -190,6 +190,7 @@ namespace ConsoleApp7
             }
             return countSign;
         }
+ master
 
     }
 }
