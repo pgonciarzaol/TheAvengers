@@ -51,13 +51,15 @@ namespace ConsoleApp7
             {
                 // TO DO
                 Console.WriteLine("Zlicz wyrazy");
+                Console.WriteLine(countWordsText());
 
             }
 
             else if (key == 4)
             {
-                // TO DO
-                Console.WriteLine("Zlicz znaki interpunkcyjne");
+
+
+                Console.WriteLine(countPunctionSignsOccurances());
 
             }
             else if (key == 5)
@@ -165,6 +167,30 @@ namespace ConsoleApp7
             }
 
         }
+        static string countPunctionSignsOccurances()
+        {
+            const string signs = @"?/!:;',.~`";
+            string fileTextInUperCase = File.ReadAllText(getFilePath());
+            int counter = 0;
+            foreach (char c in signs)
+            {
+                string sign = c.ToString(new CultureInfo("en-US", false));
+                counter += countPunctionSignOccurances(sign, signs);
+            }
+
+            return "Ilość znaków interpunkcyjnych, to: " + counter;
+        }
+        static int countPunctionSignOccurances(string sign, string signs)
+        {
+            int countSign = 0;
+            for (int i = 0; i < signs.Length; i++)
+            {
+                if (signs.Substring(i, 1) == sign)
+                    countSign++;
+            }
+            return countSign;
+        }
+ master
 
     }
 }
