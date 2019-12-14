@@ -44,20 +44,22 @@ namespace ConsoleApp7
 
             else if (key == 2)
             {
-                                Console.WriteLine(countLettersText());
+                Console.WriteLine(countLettersText());
 
             }
             else if (key == 3)
             {
                 // TO DO
                 Console.WriteLine("Zlicz wyrazy");
+                Console.WriteLine(countWordsText());
 
             }
 
             else if (key == 4)
             {
-                // TO DO
-                Console.WriteLine("Zlicz znaki interpunkcyjne");
+
+
+                Console.WriteLine(countPunctionSignsOccurances());
 
             }
             else if (key == 5)
@@ -110,34 +112,84 @@ namespace ConsoleApp7
                 Console.WriteLine("Download failed");
             }
         }
-         static String countLettersText()
+        static String countLettersText()
+        {
+            try
+            {
+                const string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                string fileTextInUperCase = File.ReadAllText(getFilePath());
+                fileTextInUperCase = fileTextInUperCase.ToUpper(new CultureInfo("en-US", false));
+                int finalCounter = 0;
+                foreach (char c in alphabet)
                 {
-                    try
-                    {
-                        const string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                        string fileTextInUperCase = File.ReadAllText(getFilePath());
-                        fileTextInUperCase = fileTextInUperCase.ToUpper(new CultureInfo("en-US", false));
-                        int finalCounter = 0;
-                        foreach (char c in alphabet)
-                        {
-                            finalCounter += countAnyLetterOccurances(c.ToString(new CultureInfo("en-US", false)), fileTextInUperCase);
-                        }
-                        return "Ilość liter w tekście to: " + finalCounter;
-                    }
-                    catch (Exception e)
-                    {
-                        return "Error Can't find file";
-                    }
+                    finalCounter += countAnyLetterOccurances(c.ToString(new CultureInfo("en-US", false)), fileTextInUperCase);
                 }
-                static int countAnyLetterOccurances(string letter, string text)
+                return "Ilość liter w tekście to: " + finalCounter;
+            }
+            catch (Exception e)
+            {
+                return "Error Can't find file";
+            }
+        }
+        static int countAnyLetterOccurances(string letter, string text)
+        {
+            int counter = 0;
+            for (int i = 0; i < text.Length; i++)
+            {
+                if (text.Substring(i, 1) == letter)
+                    counter++;
+            }
+            return counter;
+        }
+        static String countWordsText()
+        {
+            try
+            {
+                String line;
+                int count = 0;
+
+                StreamReader file = new StreamReader(getFilePath());
+
+                while ((line = file.ReadLine()) != null)
                 {
-                    int counter = 0;
-                    for (int i = 0; i < text.Length; i++)
-                    {
-                        if (text.Substring(i, 1) == letter)
-                            counter++;
-                    }
-                    return counter;
+
+                    String[] words = line.Split(' ');
+                    count = count + words.Length;
                 }
+
+                file.Close();
+                return "Number of words in the file: " + count;
+
+            }
+            catch (Exception e)
+            {
+                return "Error Can't find file";
+            }
+
+        }
+        static string countPunctionSignsOccurances()
+        {
+            const string signs = @"?/!:;',.~`";
+            string fileTextInUperCase = File.ReadAllText(getFilePath());
+            int counter = 0;
+            foreach (char c in signs)
+            {
+                string sign = c.ToString(new CultureInfo("en-US", false));
+                counter += countPunctionSignOccurances(sign, signs);
+            }
+
+            return "Ilość znaków interpunkcyjnych, to: " + counter;
+        }
+        static int countPunctionSignOccurances(string sign, string signs)
+        {
+            int countSign = 0;
+            for (int i = 0; i < signs.Length; i++)
+            {
+                if (signs.Substring(i, 1) == sign)
+                    countSign++;
+            }
+            return countSign;
+        }
+
     }
 }
