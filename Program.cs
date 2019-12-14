@@ -65,6 +65,7 @@ namespace ConsoleApp7
             else if (key == 5)
             {
                 Console.WriteLine("Zlicz liczbe zdań");
+                Console.WriteLine(countSentencesText());
 
             }
             else if (key == 6)
@@ -190,7 +191,33 @@ namespace ConsoleApp7
             }
             return countSign;
         }
- master
+        static string countSentencesText()
+        {
+            try
+            {
+                String line;
+                int count = 0;
 
+                StreamReader file = new StreamReader(getFilePath());
+                while ((line = file.ReadLine()) != null)
+                {
+                    String[] sentences = Regex.Split(line.Trim(), "\\.|\\?|\\!");
+                    foreach (String sentence in sentences)
+                    {
+                        if (!String.IsNullOrEmpty(sentence))
+                        {
+                            count++;
+                        }
+                    }
+                }
+                file.Close();
+                return "Number of sentences in the file: " + count;
+            }
+            catch (Exception e)
+            {
+                return "Error Can't find file";
+            }
+
+        }
     }
 }
