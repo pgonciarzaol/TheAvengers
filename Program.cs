@@ -94,7 +94,9 @@ namespace TheAvengers
             }
             else if (key == 8)
             {
-
+                deleteFileWords();
+                deleteFileStatistics();
+                closeAppAction();
             }
 
         }
@@ -265,6 +267,40 @@ namespace TheAvengers
             {
                 return "Error Can't find file";
             }
+        }
+        static void deleteFileWords()
+        {
+            if (File.Exists(getFilePath()))
+            {
+                try
+                {
+                    File.Delete(getFilePath());
+                }
+                catch (IOException e)
+                {
+                    Console.WriteLine(e.Message);
+                    return;
+                }
+            }
+        }
+        static void deleteFileStatistics()
+        {
+            if (File.Exists(getStatisticsPath()))
+            {
+                try
+                {
+                    File.Delete(getStatisticsPath());
+                }
+                catch (IOException e)
+                {
+                    Console.WriteLine(e.Message);
+                    return;
+                }
+            }
+        }
+        static void closeAppAction()
+        {
+            Environment.Exit(0);
         }
     }
 }
