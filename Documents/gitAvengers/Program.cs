@@ -28,52 +28,58 @@ namespace ConsoleApp7
                 Console.WriteLine(key);
             }
         }
-
+        public static string getFilePath()
+        {
+            return "C:\\Users\\" + Environment.UserName + "\\Desktop\\words.txt";
+        }
 
         public static void actionSwitch()
         {
             if (key == 1)
             {
-                // TO DO pobierz plik
+                // TO DO
                 Console.WriteLine("pobierz plik");
-
+                downloadFile();
             }
 
             else if (key == 2)
             {
-                // TO DO POlicz litery wszystkie 
-
-                Console.WriteLine(countLettersText());
+                // TO DO
+                Console.WriteLine("Zlicz liczbe liter");
 
             }
             else if (key == 3)
             {
-                // TO DO Zlicz wyrazy
+                // TO DO
+                Console.WriteLine("Zlicz wyrazy");
 
             }
 
             else if (key == 4)
             {
-                // TO DO Zlicz znaki interpunkcyjne
+                // TO DO
+                Console.WriteLine("Zlicz znaki interpunkcyjne");
 
             }
             else if (key == 5)
             {
-                //TO DO Zlicz liczbe zdań
+                Console.WriteLine("Zlicz liczbe zdań");
 
             }
             else if (key == 6)
             {
-                // TO DO wygeneruj raport
+                // TO DO
+                Console.WriteLine("wygeneruj raport");
+
             }
             else if (key == 7)
             {
-                //TO DO
+                Console.WriteLine("Zapisz do pliku");
 
             }
             else if (key == 8)
             {
-                // TO DO ZAMKNIJ APKE
+
             }
 
         }
@@ -89,5 +95,21 @@ namespace ConsoleApp7
             Console.WriteLine("8. Wyjście z programu");
         }
 
+        static void downloadFile()
+        {
+            try
+            {
+                using (WebClient client = new WebClient())
+                {
+                    client.DownloadFile("https://s3.zylowski.net/public/input/4.txt",
+                                        getFilePath());
+                }
+                Console.WriteLine("The file has been downloaded");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Download failed");
+            }
+        }
     }
 }
