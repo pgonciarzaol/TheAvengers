@@ -64,15 +64,13 @@ namespace ConsoleApp7
             }
             else if (key == 5)
             {
-                Console.WriteLine("Zlicz liczbe zdań");
                 Console.WriteLine(countSentencesText());
 
             }
             else if (key == 6)
             {
-                // TO DO
-                Console.WriteLine("wygeneruj raport");
-
+        
+                countLettersOccurances();
             }
             else if (key == 7)
             {
@@ -190,6 +188,34 @@ namespace ConsoleApp7
                     countSign++;
             }
             return countSign;
+        }
+                static void countLetterOccurrences(string letter, string line)
+        {
+
+            int countLetter = 0;
+
+
+            for (int i = 0; i < line.Length; i++)
+            {
+                if (line.Substring(i, 1) == letter)
+                    countLetter++;
+            }
+
+            Console.WriteLine(letter + ": " + countLetter);
+        }
+
+        static void countLettersOccurances()
+        {
+            const string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            string fileTextInUperCase = File.ReadAllText(getFilePath());
+            fileTextInUperCase = fileTextInUperCase.ToUpper(new CultureInfo("en-US", false));
+            Console.WriteLine("string is: " + fileTextInUperCase);
+
+            foreach (char c in alphabet)
+            {
+                countLetterOccurrences(c.ToString(new CultureInfo("en-US", false)), fileTextInUperCase);
+            }
+
         }
         static string countSentencesText()
         {
