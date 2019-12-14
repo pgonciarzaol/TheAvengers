@@ -8,7 +8,7 @@ using System.IO;
 using System.Globalization;
 using System.Text.RegularExpressions;
 
-namespace ConsoleApp7
+namespace TheAvengers
 {
     class Program
     {
@@ -32,6 +32,10 @@ namespace ConsoleApp7
         {
             return "C:\\Users\\" + Environment.UserName + "\\Desktop\\words.txt";
         }
+        public static string getStatisticsPath()
+        {
+            return "C:\\Users\\" + Environment.UserName + "\\Desktop\\statystyki.txt";
+        }
 
         public static void actionSwitch()
         {
@@ -44,38 +48,49 @@ namespace ConsoleApp7
 
             else if (key == 2)
             {
+                // TO DO
+                Console.WriteLine("Zlicz liczbe liter");
                 Console.WriteLine(countLettersText());
-
             }
             else if (key == 3)
             {
                 // TO DO
                 Console.WriteLine("Zlicz wyrazy");
-                Console.WriteLine(countWordsText());
 
+                Console.WriteLine(countWordsText());
             }
 
             else if (key == 4)
             {
-
+                // TO DO
+                Console.WriteLine("Zlicz znaki interpunkcyjne");
 
                 Console.WriteLine(countPunctionSignsOccurances());
-
             }
             else if (key == 5)
             {
-                Console.WriteLine(countSentencesText());
+                Console.WriteLine("Zlicz liczbe zdań");
 
+                Console.WriteLine(countSentencesText());
             }
             else if (key == 6)
             {
-        
+                // TO DO
+                Console.WriteLine("wygeneruj raport");
                 countLettersOccurances();
             }
             else if (key == 7)
             {
                 Console.WriteLine("Zapisz do pliku");
 
+                String[] stats = new String[] {
+                    countLettersText(),
+                    countWordsText(),
+                    countPunctionSignsOccurances(),
+                    countSentencesText()
+                };
+                File.WriteAllLines(getStatisticsPath(), stats);
+                Console.WriteLine("Zapisano do pliku " + getStatisticsPath());
             }
             else if (key == 8)
             {
@@ -95,6 +110,7 @@ namespace ConsoleApp7
             Console.WriteLine("8. Wyjście z programu");
         }
 
+
         static void downloadFile()
         {
             try
@@ -111,25 +127,8 @@ namespace ConsoleApp7
                 Console.WriteLine("Download failed");
             }
         }
-        static String countLettersText()
-        {
-            try
-            {
-                const string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                string fileTextInUperCase = File.ReadAllText(getFilePath());
-                fileTextInUperCase = fileTextInUperCase.ToUpper(new CultureInfo("en-US", false));
-                int finalCounter = 0;
-                foreach (char c in alphabet)
-                {
-                    finalCounter += countAnyLetterOccurances(c.ToString(new CultureInfo("en-US", false)), fileTextInUperCase);
-                }
-                return "Ilość liter w tekście to: " + finalCounter;
-            }
-            catch (Exception e)
-            {
-                return "Error Can't find file";
-            }
-        }
+
+
         static int countAnyLetterOccurances(string letter, string text)
         {
             int counter = 0;
@@ -140,6 +139,7 @@ namespace ConsoleApp7
             }
             return counter;
         }
+
         static String countWordsText()
         {
             try
@@ -166,57 +166,7 @@ namespace ConsoleApp7
             }
 
         }
-        static string countPunctionSignsOccurances()
-        {
-            const string signs = @"?/!:;',.~`";
-            string fileTextInUperCase = File.ReadAllText(getFilePath());
-            int counter = 0;
-            foreach (char c in signs)
-            {
-                string sign = c.ToString(new CultureInfo("en-US", false));
-                counter += countPunctionSignOccurances(sign, signs);
-            }
 
-            return "Ilość znaków interpunkcyjnych, to: " + counter;
-        }
-        static int countPunctionSignOccurances(string sign, string signs)
-        {
-            int countSign = 0;
-            for (int i = 0; i < signs.Length; i++)
-            {
-                if (signs.Substring(i, 1) == sign)
-                    countSign++;
-            }
-            return countSign;
-        }
-                static void countLetterOccurrences(string letter, string line)
-        {
-
-            int countLetter = 0;
-
-
-            for (int i = 0; i < line.Length; i++)
-            {
-                if (line.Substring(i, 1) == letter)
-                    countLetter++;
-            }
-
-            Console.WriteLine(letter + ": " + countLetter);
-        }
-
-        static void countLettersOccurances()
-        {
-            const string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            string fileTextInUperCase = File.ReadAllText(getFilePath());
-            fileTextInUperCase = fileTextInUperCase.ToUpper(new CultureInfo("en-US", false));
-            Console.WriteLine("string is: " + fileTextInUperCase);
-
-            foreach (char c in alphabet)
-            {
-                countLetterOccurrences(c.ToString(new CultureInfo("en-US", false)), fileTextInUperCase);
-            }
-
-        }
         static string countSentencesText()
         {
             try
@@ -244,6 +194,77 @@ namespace ConsoleApp7
                 return "Error Can't find file";
             }
 
+        }
+
+        static void countLetterOccurrences(string letter, string line)
+        {
+
+            int countLetter = 0;
+
+
+            for (int i = 0; i < line.Length; i++)
+            {
+                if (line.Substring(i, 1) == letter)
+                    countLetter++;
+            }
+
+            Console.WriteLine(letter + ": " + countLetter);
+        }
+
+        static void countLettersOccurances()
+        {
+            const string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            string fileTextInUperCase = File.ReadAllText(getFilePath());
+            fileTextInUperCase = fileTextInUperCase.ToUpper(new CultureInfo("en-US", false));
+            Console.WriteLine("string is: " + fileTextInUperCase);
+
+            foreach (char c in alphabet)
+            {
+                countLetterOccurrences(c.ToString(new CultureInfo("en-US", false)), fileTextInUperCase);
+            }
+
+        }
+        static string countPunctionSignsOccurances()
+        {
+            const string signs = @"?/!:;',.~`";
+            string fileTextInUperCase = File.ReadAllText(getFilePath());
+            int counter = 0;
+            foreach (char c in signs)
+            {
+                string sign = c.ToString(new CultureInfo("en-US", false));
+                counter += countPunctionSignOccurances(sign, signs);
+            }
+
+            return "Ilość znaków interpunkcyjnych, to: " + counter;
+        }
+        static int countPunctionSignOccurances(string sign, string signs)
+        {
+            int countSign = 0;
+            for (int i = 0; i < signs.Length; i++)
+            {
+                if (signs.Substring(i, 1) == sign)
+                    countSign++;
+            }
+            return countSign;
+        }
+        static String countLettersText()
+        {
+            try
+            {
+                const string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                string fileTextInUperCase = File.ReadAllText(getFilePath());
+                fileTextInUperCase = fileTextInUperCase.ToUpper(new CultureInfo("en-US", false));
+                int finalCounter = 0;
+                foreach (char c in alphabet)
+                {
+                    finalCounter += countAnyLetterOccurances(c.ToString(new CultureInfo("en-US", false)), fileTextInUperCase);
+                }
+                return "Ilość liter w tekście to: " + finalCounter;
+            }
+            catch (Exception e)
+            {
+                return "Error Can't find file";
+            }
         }
     }
 }

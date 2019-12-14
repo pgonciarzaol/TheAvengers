@@ -1,0 +1,11 @@
+C:\Users\dziki\Documents\TheAvengers\obj\Debug\netcoreapp3.1\TheAvengers.csprojAssemblyReference.cache
+C:\Users\dziki\Documents\TheAvengers\obj\Debug\netcoreapp3.1\TheAvengers.AssemblyInfoInputs.cache
+C:\Users\dziki\Documents\TheAvengers\obj\Debug\netcoreapp3.1\TheAvengers.AssemblyInfo.cs
+C:\Users\dziki\Documents\TheAvengers\bin\Debug\netcoreapp3.1\TheAvengers.exe
+C:\Users\dziki\Documents\TheAvengers\bin\Debug\netcoreapp3.1\TheAvengers.deps.json
+C:\Users\dziki\Documents\TheAvengers\bin\Debug\netcoreapp3.1\TheAvengers.runtimeconfig.json
+C:\Users\dziki\Documents\TheAvengers\bin\Debug\netcoreapp3.1\TheAvengers.runtimeconfig.dev.json
+C:\Users\dziki\Documents\TheAvengers\bin\Debug\netcoreapp3.1\TheAvengers.dll
+C:\Users\dziki\Documents\TheAvengers\bin\Debug\netcoreapp3.1\TheAvengers.pdb
+C:\Users\dziki\Documents\TheAvengers\obj\Debug\netcoreapp3.1\TheAvengers.dll
+C:\Users\dziki\Documents\TheAvengers\obj\Debug\netcoreapp3.1\TheAvengers.pdb
