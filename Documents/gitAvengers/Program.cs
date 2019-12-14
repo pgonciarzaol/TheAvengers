@@ -42,6 +42,9 @@ namespace ConsoleApp7
             else if (key == 2)
             {
                 // TO DO POlicz litery wszystkie 
+
+                Console.WriteLine(countLettersText());
+
             }
             else if (key == 3)
             {
@@ -85,7 +88,6 @@ namespace ConsoleApp7
             Console.WriteLine("7. Zapisz statystyki z punktów 2-5 do pliku statystyki.txt");
             Console.WriteLine("8. Wyjście z programu");
         }
-
 
     }
 }
