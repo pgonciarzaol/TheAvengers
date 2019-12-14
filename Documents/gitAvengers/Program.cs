@@ -41,7 +41,8 @@ namespace ConsoleApp7
 
             else if (key == 2)
             {
-                // TO DO Zlicz liczbe liter
+                Console.WriteLine(countLettersText());
+
             }
             else if (key == 3)
             {
@@ -84,6 +85,35 @@ namespace ConsoleApp7
             Console.WriteLine("6. Wygeneruj raport o użyciu liter (A-Z)");
             Console.WriteLine("7. Zapisz statystyki z punktów 2-5 do pliku statystyki.txt");
             Console.WriteLine("8. Wyjście z programu");
+        }
+        static String countLettersText()
+        {
+            try
+            {
+                const string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                string fileTextInUperCase = File.ReadAllText(getFilePath());
+                fileTextInUperCase = fileTextInUperCase.ToUpper(new CultureInfo("en-US", false));
+                int finalCounter = 0;
+                foreach (char c in alphabet)
+                {
+                    finalCounter += countAnyLetterOccurances(c.ToString(new CultureInfo("en-US", false)), fileTextInUperCase);
+                }
+                return "Ilość liter w tekście to: " + finalCounter;
+            }
+            catch (Exception e)
+            {
+                return "Error Can't find file";
+            }
+        }
+        static int countAnyLetterOccurances(string letter, string text)
+        {
+            int counter = 0;
+            for (int i = 0; i < text.Length; i++)
+            {
+                if (text.Substring(i, 1) == letter)
+                    counter++;
+            }
+            return counter;
         }
     }
 }
