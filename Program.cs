@@ -13,6 +13,11 @@ namespace TheAvengers
     class Program
     {
         static int key;
+        static string downloadLocation = "https://s3.zylowski.net/public/input/4.txt";
+        static string filename;
+        static bool fileFromDisk;
+        static string text;
+        static string filePath;
 
         static void Main(string[] args)
         {
@@ -30,7 +35,15 @@ namespace TheAvengers
         }
         public static string getFilePath()
         {
-            return "C:\\Users\\" + Environment.UserName + "\\Desktop\\words.txt";
+            if (fileFromDisk)
+            {
+
+                return filePath;
+            }
+            else
+            {
+                return "C:\\Users\\" + Environment.UserName + "\\Desktop\\words.txt";
+            }
         }
         public static string getStatisticsPath()
         {
@@ -41,21 +54,16 @@ namespace TheAvengers
         {
             if (key == 1)
             {
-                // TO DO
-                Console.WriteLine("pobierz plik");
-                downloadFile();
+
+                chooseFile();
             }
 
             else if (key == 2)
             {
-                // TO DO
-                Console.WriteLine("Zlicz liczbe liter");
                 Console.WriteLine(countLettersText());
             }
             else if (key == 3)
             {
-                // TO DO
-                Console.WriteLine("Zlicz wyrazy");
 
                 Console.WriteLine(countWordsText());
             }
@@ -102,7 +110,7 @@ namespace TheAvengers
         }
         static void printMenu()
         {
-            Console.WriteLine("1. Pobierz plik z internetu");
+            Console.WriteLine("1. Wybierz plik wejściowy");
             Console.WriteLine("2. Zlicz liczbę liter w pobranym pliku");
             Console.WriteLine("3. Zlicz liczbę wyrazów w pliku");
             Console.WriteLine("4. Zlicz liczbę znaków interpunkcyjnych w pliku.");
@@ -111,7 +119,30 @@ namespace TheAvengers
             Console.WriteLine("7. Zapisz statystyki z punktów 2-5 do pliku statystyki.txt");
             Console.WriteLine("8. Wyjście z programu");
         }
+        static void chooseFile()
+        {
+            Console.WriteLine("Czy pobrać plik z internetu [T/N]?");
+            string choosen = Console.ReadLine();
+            if (choosen.Equals("t", StringComparison.OrdinalIgnoreCase))
+            {
+                Console.WriteLine("podaj adres pliku");
+                downloadLocation = Console.ReadLine();
+                downloadFile();
+                fileFromDisk = false;
+            }
+            if (choosen.Equals("n", StringComparison.OrdinalIgnoreCase))
+            {
+                fileFromDisk = true;
+                Console.WriteLine("podaj nazwe pliku txt");
+                filename = Console.ReadLine();
+                filePath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), filename);
+                filePath = filePath.Replace(@"bin\Debug\netcoreapp3.1\", "");
 
+
+
+            }
+
+        }
 
         static void downloadFile()
         {
@@ -119,7 +150,8 @@ namespace TheAvengers
             {
                 using (WebClient client = new WebClient())
                 {
-                    client.DownloadFile("https://s3.zylowski.net/public/input/4.txt",
+                    Console.WriteLine(getFilePath());
+                    client.DownloadFile(downloadLocation,
                                         getFilePath());
                 }
                 Console.WriteLine("The file has been downloaded");
@@ -234,6 +266,7 @@ namespace TheAvengers
             foreach (char c in signs)
             {
                 string sign = c.ToString(new CultureInfo("en-US", false));
+
                 counter += countPunctionSignOccurances(sign, signs);
             }
 
@@ -254,8 +287,9 @@ namespace TheAvengers
             try
             {
                 const string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                string fileTextInUperCase = File.ReadAllText(getFilePath());
-                fileTextInUperCase = fileTextInUperCase.ToUpper(new CultureInfo("en-US", false));
+                Console.WriteLine(getFilePath());
+                filePath = getFilePath();
+                string fileTextInUperCase = File.ReadAllText(filePath).ToUpper();
                 int finalCounter = 0;
                 foreach (char c in alphabet)
                 {
