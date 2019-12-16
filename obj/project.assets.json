@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\dziki\\Documents\\magda\\TheAvengers\\TheAvengers.csproj",
+      "projectUniqueName": "C:\\Users\\dziki\\Documents\\TheAvengers\\TheAvengers.csproj",
       "projectName": "TheAvengers",
-      "projectPath": "C:\\Users\\dziki\\Documents\\magda\\TheAvengers\\TheAvengers.csproj",
+      "projectPath": "C:\\Users\\dziki\\Documents\\TheAvengers\\TheAvengers.csproj",
       "packagesPath": "C:\\Users\\dziki\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\dziki\\Documents\\magda\\TheAvengers\\obj\\",
+      "outputPath": "C:\\Users\\dziki\\Documents\\TheAvengers\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\dziki\\AppData\\Roaming\\NuGet\\NuGet.Config",
