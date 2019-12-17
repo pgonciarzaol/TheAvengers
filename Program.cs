@@ -211,7 +211,9 @@ namespace TheAvengers
                 StreamReader file = new StreamReader(getFilePath());
                 while ((line = file.ReadLine()) != null)
                 {
-                    String[] sentences = Regex.Split(line.Trim(), "\\.|\\?|\\!");
+
+                    String[] sentences = Regex.Split(line.Trim(), "\\.|\\?");
+
                     foreach (String sentence in sentences)
                     {
                         if (!String.IsNullOrEmpty(sentence))
