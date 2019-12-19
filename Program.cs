@@ -71,7 +71,7 @@ namespace TheAvengers
             else if (key == 4)
             {
                 // TO DO
-                Console.WriteLine("Zlicz znaki interpunkcyjne");
+                Console.WriteLine("Zlicz znaki interpunkcyjne '?' oraz '.'");
 
                 Console.WriteLine(countPunctionSignsOccurances());
             }
@@ -262,24 +262,24 @@ namespace TheAvengers
         }
         static string countPunctionSignsOccurances()
         {
-            const string signs = @"?/!:;',.~`";
+            const string signs = @"?.";
             string fileTextInUperCase = File.ReadAllText(getFilePath());
             int counter = 0;
             foreach (char c in signs)
             {
                 string sign = c.ToString(new CultureInfo("en-US", false));
 
-                counter += countPunctionSignOccurances(sign, signs);
+                counter += countPunctionSignOccurances(sign, fileTextInUperCase);
             }
 
-            return "Ilość znaków interpunkcyjnych, to: " + counter;
+            return "Ilość znaków interpunkcyjnych '?' oraz '.', to: " + counter;
         }
-        static int countPunctionSignOccurances(string sign, string signs)
+        static int countPunctionSignOccurances(string sign, string textToSearchIn)
         {
             int countSign = 0;
-            for (int i = 0; i < signs.Length; i++)
+            for (int i = 0; i < textToSearchIn.Length; i++)
             {
-                if (signs.Substring(i, 1) == sign)
+                if (textToSearchIn.Substring(i, 1) == sign)
                     countSign++;
             }
             return countSign;
