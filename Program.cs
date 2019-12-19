@@ -60,7 +60,9 @@ namespace TheAvengers
 
             else if (key == 2)
             {
-                Console.WriteLine(countLettersText());
+                Console.WriteLine(countVowelsText());
+                Console.WriteLine(countConsonantsText());
+
             }
             else if (key == 3)
             {
@@ -92,7 +94,9 @@ namespace TheAvengers
                 Console.WriteLine("Zapisz do pliku");
 
                 String[] stats = new String[] {
-                    countLettersText(),
+
+                    countVowelsText(),
+                    countConsonantsText(),
                     countWordsText(),
                     countPunctionSignsOccurances(),
                     countSentencesText()
@@ -137,8 +141,6 @@ namespace TheAvengers
                 filename = Console.ReadLine();
                 filePath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), filename);
                 filePath = filePath.Replace(@"bin\Debug\netcoreapp3.1\", "");
-
-
 
             }
 
@@ -284,26 +286,49 @@ namespace TheAvengers
             }
             return countSign;
         }
-        static String countLettersText()
+
+        static String countVowelsText()
         {
             try
             {
-                const string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                const string vowels = "AEIOU";
                 Console.WriteLine(getFilePath());
                 filePath = getFilePath();
                 string fileTextInUperCase = File.ReadAllText(filePath).ToUpper();
                 int finalCounter = 0;
-                foreach (char c in alphabet)
+                foreach (char c in vowels)
                 {
                     finalCounter += countAnyLetterOccurances(c.ToString(new CultureInfo("en-US", false)), fileTextInUperCase);
                 }
-                return "Ilość liter w tekście to: " + finalCounter;
+                return "Ilość samogłosek w tekście to: " + finalCounter;
             }
             catch (Exception e)
             {
                 return "Error Can't find file";
             }
         }
+
+        static String countConsonantsText()
+        {
+            try
+            {
+                const string consonants = "BCDFGHJKLMNPRSTWXYZ";
+                Console.WriteLine(getFilePath());
+                filePath = getFilePath();
+                string fileTextInUperCase = File.ReadAllText(filePath).ToUpper();
+                int finalCounter = 0;
+                foreach (char c in consonants)
+                {
+                    finalCounter += countAnyLetterOccurances(c.ToString(new CultureInfo("en-US", false)), fileTextInUperCase);
+                }
+                return "Ilość spółgłosek w tekście: " + finalCounter;
+            }
+            catch (Exception e)
+            {
+                return "Error Can't find file";
+            }
+        }
+
         static void deleteFileWords()
         {
             if (File.Exists(getFilePath()))
@@ -340,3 +365,4 @@ namespace TheAvengers
         }
     }
 }
+
