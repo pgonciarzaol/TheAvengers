@@ -187,7 +187,14 @@ namespace TheAvengers
                 {
 
                     String[] words = line.Split(' ');
-                    count = count + words.Length;
+
+                    foreach (string word in words)
+                    {
+                        if (word.Length > 1)
+                        {
+                            count = count + 1;
+                        }
+                    }
                 }
 
                 file.Close();
