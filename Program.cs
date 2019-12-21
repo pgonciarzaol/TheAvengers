@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -189,7 +189,14 @@ namespace TheAvengers
                 {
 
                     String[] words = line.Split(' ');
-                    count = count + words.Length;
+
+                    foreach (string word in words)
+                    {
+                        if (word.Length > 1)
+                        {
+                            count = count + 1;
+                        }
+                    }
                 }
 
                 file.Close();
@@ -291,7 +298,7 @@ namespace TheAvengers
         {
             try
             {
-                const string vowels = "AEIOU";
+                const string vowels = "AEIOUY";
                 Console.WriteLine(getFilePath());
                 filePath = getFilePath();
                 string fileTextInUperCase = File.ReadAllText(filePath).ToUpper();
@@ -312,22 +319,26 @@ namespace TheAvengers
         {
             try
             {
-                const string consonants = "BCDFGHJKLMNPRSTWXYZ";
+                const string consonants = "BCDFGHJKLMNPRSTWXZ";
+
                 Console.WriteLine(getFilePath());
                 filePath = getFilePath();
                 string fileTextInUperCase = File.ReadAllText(filePath).ToUpper();
                 int finalCounter = 0;
+
                 foreach (char c in consonants)
                 {
                     finalCounter += countAnyLetterOccurances(c.ToString(new CultureInfo("en-US", false)), fileTextInUperCase);
                 }
                 return "Ilość spółgłosek w tekście: " + finalCounter;
+
             }
             catch (Exception e)
             {
                 return "Error Can't find file";
             }
         }
+
 
         static void deleteFileWords()
         {
