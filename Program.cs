@@ -200,7 +200,7 @@ namespace TheAvengers
                 }
 
                 file.Close();
-                return "Number of words in the file: " + count;
+                return "Ilość słów w pliku: " + count;
 
             }
             catch (Exception e)
@@ -232,7 +232,7 @@ namespace TheAvengers
                     }
                 }
                 file.Close();
-                return "Number of sentences in the file: " + count;
+                return "Ilośc zdań w pliku: " + count;
             }
             catch (Exception e)
             {
@@ -281,7 +281,7 @@ namespace TheAvengers
                 counter += countPunctionSignOccurances(sign, fileTextInUperCase);
             }
 
-            return "Ilość znaków interpunkcyjnych '?' oraz '.', to: " + counter;
+            return "Ilość znaków interpunkcyjnych '?' oraz '.': " + counter;
         }
         static int countPunctionSignOccurances(string sign, string textToSearchIn)
         {
@@ -307,7 +307,7 @@ namespace TheAvengers
                 {
                     finalCounter += countAnyLetterOccurances(c.ToString(new CultureInfo("en-US", false)), fileTextInUperCase);
                 }
-                return "Ilość samogłosek w tekście to: " + finalCounter;
+                return "Ilość samogłosek w tekście: " + finalCounter;
             }
             catch (Exception e)
             {
