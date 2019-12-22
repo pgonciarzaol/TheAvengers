@@ -232,7 +232,7 @@ namespace TheAvengers
                     }
                 }
                 file.Close();
-                return "Ilośc zdań w pliku: " + count;
+                return "Ilość zdań w pliku: " + count;
             }
             catch (Exception e)
             {
